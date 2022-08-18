@@ -1,0 +1,100 @@
+.divNaziv{
+    align-items:center;
+    justify-content:center;
+}
+.lokalni{
+    display:flex;
+    height:70%;
+    width:250px;
+    justify-content:space-around;
+}
+
+.filterDiv{
+    display:flex;
+    flex-direction: column;
+    justify-content: stretch;
+    height:50%;
+    border: 2px;
+}
+.glavniDivKomponenta{
+    display:flex;
+    flex-direction: column;
+    height:200px;
+    flex: 1 1 0;
+}
+.divDugme{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+}
+.Kontejner{
+    display:flex;
+    width:100%;
+    height:100%;
+    flex-direction: column;
+}
+.divLabeleKomponenta{
+    display:flex;
+    flex-direction:column;
+    flex:1 1 0;
+    align-items:center;
+
+}
+.labeleVrednostiKomponente{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+.Naslov{
+    display:flex;
+    justify-content:center;
+}
+
+.kontejnerKomponente{
+    display:flex;
+    justify-content:space-evenly;
+    flex-wrap: wrap;
+    
+
+}
+.dugmeKonfigurisi{
+    display:flex;
+    justify-content: center;
+    
+}
+.komponenteDiv{
+    display:wrap;
+    width:80%;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+body{
+  margin:0;
+  height:100%;
+}
+.divFilter{
+    display:flex;
+    height:70%;
+    border:1cm;
+    
+}
+.divLab{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.divKomponenta{
+    display:flex;
+    align-items:space-evenly;
+}
+.divInput{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+html{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
