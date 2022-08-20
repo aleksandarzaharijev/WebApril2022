@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using Template.Models;
 
 namespace Template.Controllers
 {   
@@ -29,7 +30,7 @@ namespace Template.Controllers
         {
                 var prodavnica = Context.Spojevi
                                 .Include(p=>p.Komponenta)
-                                .Where(p=>p.Prodavnica.ProdavnicaID==prodavnicaID&&p.Komponenta.Tip.TipID==tipID);
+                                .Where(p=>p.Prodavnica.ProdavnicaID==prodavnicaID && p.Komponenta.Tip.TipID==tipID);
 
         if(brendID>0 && cenaOd<=0 && cenaDo<=0)
            {
@@ -64,33 +65,35 @@ namespace Template.Controllers
         }
     }
     
-      [Route("Kupi konfiguraciju/{prodavnicaID}/{komponentaID}/{kolicina}")]
-        [HttpPut]
+      [Route("Kupikonfiguraciju")]
+      [HttpPut]
 
-        public async Task<ActionResult> kupiKonfiguraciju(int prodavnicaID,int komponentaID, int kolicina)
+        public async Task<ActionResult> kupiKonfiguraciju([FromBody] Spoj[] Spojevi)
         {   
+
             try{
-            var komponenta = Context.Spojevi
-                                      .Include(p=>p.Komponenta)
-                                      .Where(p=>p.Prodavnica.ProdavnicaID==prodavnicaID && p.Komponenta.KomponentaID==komponentaID)
-                                      .FirstOrDefault();
-              if(komponenta!=null)
-            {
 
-            if(kolicina > komponenta.Kolicina)
+             foreach(Spoj idjevi in Spojevi)
+             {  
+               
+                var komponenta = Context.Spojevi
+                                        .Where(p=>p.SpojID==idjevi.SpojID && p.Kolicina >= idjevi.Kolicina)
+                                        .FirstOrDefault();
+                if(komponenta!=null)
+                {
+                    komponenta.Kolicina-=idjevi.Kolicina;
+                }
+                else{
+                    return BadRequest("Nemamo dovoljno kolicine");
+                }
+                
+             } 
 
-            {
-               return BadRequest("Nemamo toliko komponenti na zalihama");
-            }
-              komponenta.Kolicina = komponenta.Kolicina-kolicina;
-               await Context.SaveChangesAsync();
-              return Ok("Kupljena konfiguracija, kolicina oduzeta");
+             await Context.SaveChangesAsync();
 
-            }
-            else{
-                return Ok("Ne postoji ovakva komponenta u bazi");
-            }
-            }
+             return Ok("Uspesna kupovina");
+
+            } 
             catch(Exception e )
             {
               return BadRequest(e.Message);

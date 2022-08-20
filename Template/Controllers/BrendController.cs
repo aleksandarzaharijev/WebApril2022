@@ -15,34 +15,6 @@ namespace Template.Controllers
 
          public BrendController(IspitDbContext c)=> Context=c;
     
-         [Route("Preuzmibrendove")]
-       [HttpGet] 
-
-       public async Task<ActionResult> preuzmiBrendove()
-        {
-            var brendovi = await Context.Brendovi.Select(
-                p=>new{
-                     Id = p.BrendID,
-                    Naziv = p.Naziv
-                }
-            ).ToListAsync();
-            return Ok(brendovi);
-        } 
-          
-          [Route("Preuzmitipove")]
-         [HttpGet]
-
-         public async Task<ActionResult> preuzmiTipove()
-         {  
-             var tipovi = await Context.Tipovi.Select(p=>
-             new {
-                Id = p.TipID,
-                Naziv = p.Naziv
-             }
-             ).ToListAsync();
-
-             return Ok(tipovi);
-         }
        
        [Route("PreuzmiTipoveProdavnice/{prodavnicaID}")]
        [HttpGet]

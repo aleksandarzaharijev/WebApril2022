@@ -52,11 +52,13 @@ export class Prodavnica {
        komponenteKontejner.className="komponenteDiv";
        divFilter.appendChild(komponenteKontejner);
        
-      
+      let komp = document.createElement("div");
+      komp.className="kompDiv";
+      komponenteKontejner.appendChild(komp);
        
        let komponenteK = document.createElement("div");
        komponenteK.className="kontejnerKomponente";
-       komponenteKontejner.appendChild(komponenteK);
+       komp.appendChild(komponenteK);
       
        let tablicaKontejner = document.createElement("div");
        tablicaKontejner.className="tablicaKontejner";
@@ -227,12 +229,13 @@ export class Prodavnica {
    { 
     
     let opcija = this.kontejner.querySelectorAll("select");
-    let divKomp = document.querySelector(".kontejnerKomponente");
+    let divKomp = document.querySelector(".kompDiv");
     let divKompCeli = document.querySelectorAll(".glavniDivKomponenta");    
     
-    divKompCeli.forEach(p=>{
-        p.replaceChild();
-    })
+    this.removeAllChildNodes(divKomp);
+   /* divKompCeli.forEach(p=>{
+        p.replaceChildren();
+    })*/
     
     console.log(divKomp);
     let tipId = opcija[0].options[opcija[0].selectedIndex].value;
